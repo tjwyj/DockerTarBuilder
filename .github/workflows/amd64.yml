@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
     - name: Switch directory
       run: |
           pwd
           cd /dev/sda1
+          
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+
           
     - name: Clean up Docker to free space
       run: |
