@@ -11,21 +11,19 @@ jobs:
   pull_and_package:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Switch directory
-      run: |
-          pwd
-          cd /dev/sda1
-          
+    steps:        
     - name: Checkout repository
       uses: actions/checkout@v4
-      
-
           
     - name: Clean up Docker to free space
       run: |
           docker system prune -a -f
           docker volume prune -f
+          # https://github.com/actions/runner-images/issues/2840#issuecomment-790492173
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
     - name: Free up Disk Space
       run: |
           # Remove specific Docker images that are no longer needed
