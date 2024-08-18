@@ -19,7 +19,17 @@ jobs:
       run: |
           docker system prune -a -f
           docker volume prune -f
-
+    - name: Free up Disk Space
+      run: |
+          # Remove specific Docker images that are no longer needed
+          docker rmi $(docker images -f "dangling=true" -q) || true
+          # Prune unused Docker objects (images, containers, volumes, and networks)
+          docker system prune -f || true
+          # Clean up specific directories known to consume a lot of space
+          # sudo rm -rf /path/to/large/directory
+          # Show disk space usage
+          df -h
+    
     - name: Pull Docker Images and Package
       run: |
         images="${{ github.event.inputs.docker_images }}"
