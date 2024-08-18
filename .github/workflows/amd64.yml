@@ -14,7 +14,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-
+      
+    - name: Switch directory
+      run: |
+          pwd
+          cd /dev/sda1
+          
     - name: Clean up Docker to free space
       run: |
           docker system prune -a -f
