@@ -17,6 +17,7 @@ jobs:
           
     - name: Clean up Docker to free space
       run: |
+          pwd
           docker system prune -a -f
           docker volume prune -f
           # https://github.com/actions/runner-images/issues/2840#issuecomment-790492173
